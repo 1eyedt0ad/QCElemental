@@ -72,6 +72,13 @@ class BondOrderFloat(ConstrainedFloat):
     ge = 0
     le = 5
 
+class BondTypeInt(ConstrainedInt):
+    # supports cheminformatics bond types
+    # 1, 2, 3 are the same considered as a bond order or a bond type
+    # 1.5 
+    ge = 0
+    le = 21
+
 
 class Identifiers(ProtoModel):
     r"""Canonical chemical identifiers"""
@@ -219,7 +226,9 @@ class Molecule(ProtoModel):
     )
 
     # Fragment and connection data
-    connectivity_: Optional[List[Tuple[NonnegativeInt, NonnegativeInt, BondOrderFloat]]] = Field(  # type: ignore
+    connectivity_: Optional[List[Tuple[
+        NonnegativeInt, NonnegativeInt, Union[BondOrderFloat, BondTypeInt]
+        ]]] = Field(  # type: ignore
         None,
         description="A list of bonds within the molecule. Each entry is a tuple "
         "of ``(atom_index_A, atom_index_B, bond_order)`` where the ``atom_index`` "
