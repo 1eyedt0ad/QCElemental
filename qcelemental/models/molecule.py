@@ -73,9 +73,9 @@ class BondOrderFloat(ConstrainedFloat):
     le = 5
 
 class BondTypeInt(ConstrainedInt):
-    # supports cheminformatics bond types
-    # 1, 2, 3 are the same considered as a bond order or a bond type
-    # 1.5 
+    """supports cheminformatics bond types. 
+    1, 2, 3 are the same considered as a bond order or a bond type. 
+    non-integer bond orders from QM calcs can be easily translated into BondTypes in appropriate ProgramHarnesses"""
     ge = 0
     le = 21
 
