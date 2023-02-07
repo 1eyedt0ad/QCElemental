@@ -468,7 +468,7 @@ def validate_and_fill_units(
                 if not (float(at2)).is_integer() or at2 < 0:  # or at2 >= nat:
                     raise ValidationError("""Connectivity second atom should be int [0, nat): {}""".format(at2))
                 if bondorder < 0 or bondorder > 5:
-                    if not (float(bondorder)).is_integer() or 0 <= bondorder <= 21:
+                    if not (float(bondorder)).is_integer() or bondorder <= 0 or bondorder >= 21:
                         raise ValidationError("""Connectivity bond order should be float [0, 5] or bond type should be integer [0, 21]: {}""".format(bondorder))
                 conn.append((int(min(at1, at2)), int(max(at1, at2)), float(bondorder)))
             conn.sort(key=lambda tup: tup[0])
